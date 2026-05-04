@@ -1,5 +1,5 @@
 # RetroactiveDSP Firmware Updater
 
-Live site: [https://treybourgeois.github.io/RetroactiveDSP/](https://treybourgeois.github.io/RetroactiveDSP/)
+Live site: [https://meandthetrio.github.io/USB_Program_Tool/](https://meandthetrio.github.io/USB_Program_Tool/)
 
-RetroactiveDSP Firmware Updates Repo
+Project repo: [https://github.com/meandthetrio/BAKER](https://github.com/meandthetrio/BAKER)
