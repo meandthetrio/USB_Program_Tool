@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Retroactive DSP Firmware Updater</title>
+    <link rel="icon" href="./img/R_logo_nobackground.png">
+    <link rel="stylesheet" href="css/chatstyle.css">
+
+    <style>
+        .status-wrap {
+            margin-top: 10px;
+        }
+
+        .status-bar-outer {
+            width: 100%;
+            height: 18px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 999px;
+            overflow: hidden;
+            box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.35);
+        }
+
+        .status-bar-inner {
+            width: 0%;
+            height: 100%;
+            border-radius: 999px;
+            transition: width 0.25s ease;
+            background: linear-gradient(90deg, #00d2ff, #7cf7ff);
+            box-shadow: 0 0 12px rgba(0, 210, 255, 0.65);
+        }
+
+        .status-message {
+            margin-top: 14px;
+            min-height: 28px;
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+        .status-message.success {
+            color: #4cff88;
+            font-weight: 700;
+            text-shadow: 0 0 8px rgba(76, 255, 136, 0.45);
+        }
+
+        .status-message.error {
+            color: #ff5a5a;
+            font-weight: 700;
+            text-shadow: 0 0 8px rgba(255, 90, 90, 0.35);
+        }
+
+        .status-message.idle {
+            color: rgba(255, 255, 255, 0.75);
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+
+    <header class="site-header">
+        <div class="brand">
+            <img src="img/R_logo_nobackground.png" alt="My Logo" class="logo">
+            <div class="brand-kicker">Firmware Utility</div>
+            <h1 class="brand-title">Retroactive.DSP</h1>
+        </div>
+    </header>
+
+    <section class="section">
+        <h2 class="section-title">Step 1 • Connect Device</h2>
+        <p>
+            Click Connect, then place your Daisy into <strong>BOOTLOADER MODE</strong> and select it from the USB popup.
+        </p>
+        <div class="connect-row">
+            <button id="connectBtn" class="button-primary">
+                Connect
+            </button>
+            <span id="connectionStatus" class="status-pill disconnected">
+                <span class="badge-dot"></span>
+                <span class="connection-label">Not connected</span>
+            </span>
+        </div>
+        <p>
+            <span class="instruction-dot">•</span> To enter <strong>BOOTLOADER MODE</strong>, press <strong>CONNECT</strong> and then
+            <strong>RESET</strong> on the Daisy Seed. <strong>"DAISY BOOTLOADER"</strong> should appear in the popup window.
+        </p>
+        <p>
+            <span class="instruction-dot">•</span> If <strong>"DAISY BOOTLOADER"</strong> disappears from the popup after only a few seconds, simply press
+            <strong>BOOT (ONCE)</strong> while <strong>"DAISY BOOTLOADER - PAIRED"</strong> is displayed in the popup window.
+            This will lock in Bootloader mode indefinitely.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Step 2 • Select Firmware</h2>
+        <label for="firmwareSelect">Firmware Version</label>
+        <select id="firmwareSelect">
+            <option>Loading firmware...</option>
+        </select>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Step 3 • Flash Firmware</h2>
+        <button id="flashBtn" class="button-accent" disabled>
+            Flash Firmware
+        </button>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Status</h2>
+        <div class="status-wrap">
+            <div class="status-bar-row">
+                <div class="status-bar-outer">
+                    <div id="statusBar" class="status-bar-inner"></div>
+                </div>
+                <div id="statusPercent" class="status-percent">0%</div>
+            </div>
+            <div id="statusMessage" class="status-message idle"></div>
+        </div>
+    </section>
+
+    <section class="section troubleshooting-section">
+        <h2 class="section-title">Troubleshooting</h2>
+        <div class="browser-support-note">
+            🛑 While users have reported intermittent success with Firefox and Safari, Google Chrome is the only officially supported browser for flashing firmware to Daisy.
+        </div>
+        <h3 class="section-title">Reset USB Driver with Zadig (Windows Only)</h3>
+        <p>
+            If Chrome cannot find your device, you may need to install the correct USB driver:
+        </p>
+        <ol>
+            <li>Download <a href="https://zadig.akeo.ie/" target="_blank" rel="noopener noreferrer">Zadig</a> (latest version).</li>
+            <li>Launch <strong>Zadig</strong>.</li>
+            <li>Put device into <strong>BOOTLOADER</strong> mode by following the above steps.</li>
+            <li>In Zadig, click <strong>Options</strong> then <strong>List All Devices</strong>.</li>
+            <li>Select <strong>Daisy Bootloader</strong> from the dropdown.</li>
+            <li>Set the target driver (right side) to <strong>WinUSB</strong>.</li>
+            <li>Click <strong>Replace Driver</strong>.</li>
+        </ol>
+        <p>
+            After Zadig finishes, return to Chrome and try connecting again.
+        </p>
+    </section>
+
+</div>
+
+<script src="dfu/dfu.js"></script>
+<script src="dfu/dfuse.js"></script>
+<script src="dfu/FileSaver.js"></script>
+<script type="module" src="js/app.js"></script>
+
+</body>
+</html>

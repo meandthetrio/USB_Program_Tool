@@ -1,0 +1,133 @@
+let selectedDevice = null;
+const STM_VENDOR_ID = 0x0483;
+const STM_DFU_PRODUCT_ID = 0xdf11;
+
+function toHex(value, width = 4) {
+  return value.toString(16).toUpperCase().padStart(width, "0");
+}
+
+function describeDevice(usbDevice) {
+  if (!usbDevice) return "unknown device";
+  const product = usbDevice.productName || "Unknown Product";
+  const serial = usbDevice.serialNumber || "n/a";
+  return `${product} (VID 0x${toHex(usbDevice.vendorId)}, PID 0x${toHex(
+    usbDevice.productId
+  )}, serial ${serial})`;
+}
+
+function hasDfuInterface(usbDevice) {
+  if (!usbDevice.configuration || !usbDevice.configuration.interfaces) {
+    return false;
+  }
+
+  return usbDevice.configuration.interfaces.some((iface) =>
+    iface.alternates.some(
+      (alt) =>
+        (alt.interfaceClass === 0xfe && alt.interfaceSubclass === 0x01) ||
+        (alt.interfaceName || "").toLowerCase().includes("dfu")
+    )
+  );
+}
+
+export async function connectDevice(mode = "auto") {
+  if (!("usb" in navigator)) {
+    throw new Error("WebUSB is not supported in this browser. Use Chrome or another Chromium-based browser.");
+  }
+
+  const normalizedMode = mode === "fs" ? "fs" : "app";
+  if (selectedDevice) {
+    try {
+      if (selectedDevice.opened) {
+        await selectedDevice.close();
+      }
+    } catch (closeErr) {
+      // Ignore close failures from stale handles.
+    } finally {
+      selectedDevice = null;
+    }
+  }
+
+  const filters =
+    normalizedMode === "fs"
+      ? [{ vendorId: STM_VENDOR_ID, productId: STM_DFU_PRODUCT_ID }]
+      : [
+          { vendorId: STM_VENDOR_ID, productId: STM_DFU_PRODUCT_ID },
+          { classCode: 0xfe, subclassCode: 0x01 }
+        ];
+
+  const device = await navigator.usb.requestDevice({ filters });
+
+  try {
+    await device.open();
+  } catch (err) {
+    const message = (err && err.message ? err.message : String(err)).toLowerCase();
+    if (message.includes("access denied")) {
+      throw new Error(
+        `Access denied while opening ${describeDevice(device)}. Close other tabs/apps using the device, then in Windows Zadig bind this exact device to WinUSB and retry Connect.`
+      );
+    }
+    throw err;
+  }
+
+  if (device.configuration === null) {
+    await device.selectConfiguration(1);
+  }
+
+  const productName = (device.productName || "").toLowerCase();
+  const looksLikeDaisyBootloader =
+    productName.includes("daisy") ||
+    productName.includes("bootloader") ||
+    productName.includes("dfu");
+  const isStmRomDfu =
+    device.vendorId === STM_VENDOR_ID && device.productId === STM_DFU_PRODUCT_ID;
+
+  if (normalizedMode === "fs" && !isStmRomDfu) {
+    try {
+      await device.close();
+    } catch (closeErr) {
+      // Ignore close failures.
+    }
+
+    throw new Error(
+      `Selected device is not DFU in FS Mode (VID 0x${toHex(STM_VENDOR_ID)}, PID 0x${toHex(STM_DFU_PRODUCT_ID)}). ` +
+        "For first-time bootloader install, choose STM32 BOOTLOADER / DFU in FS Mode in the USB popup."
+    );
+  }
+
+  if (normalizedMode === "app" && !isStmRomDfu && !looksLikeDaisyBootloader && !hasDfuInterface(device)) {
+    try {
+      await device.close();
+    } catch (closeErr) {
+      // Ignore close failures.
+    }
+
+    throw new Error(
+      "Selected device is not a DFU-capable bootloader device. In the USB popup choose DAISY BOOTLOADER or STM32 DFU in FS Mode."
+    );
+  }
+
+  if (!hasDfuInterface(device)) {
+    try {
+      await device.close();
+    } catch (closeErr) {
+      // Ignore close failures.
+    }
+
+    throw new Error(
+      "Selected USB device does not expose a DFU interface. Choose a DFU/BOOTLOADER device in the USB popup."
+    );
+  }
+
+  selectedDevice = device;
+
+  return {
+    productName: device.productName || "Unknown USB Device",
+    manufacturerName: device.manufacturerName || "Unknown Manufacturer",
+    vendorId: `0x${toHex(device.vendorId)}`,
+    productId: `0x${toHex(device.productId)}`
+  };
+}
+
+export function getConnectedDevice() {
+  return selectedDevice;
+}
