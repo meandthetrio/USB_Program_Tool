@@ -3,17 +3,12 @@
   "releases": [
     
     {
-      "name": "Firmware v1.2",
-      "file": "firmware/stable/ADSR_V2.bin",
-      "repo_branch": "BAKER_EDGE_KEYZONE_FINAL"
+      "name": "Firmware Cuz (latest) Boot+ExpressLogo",
+      "file": "firmware/stable/Cuz_Working_BootandExpressLogo.bin",
+      "repo_branch": "BAKER_EXPRESS"
     },
     {
-      "name": "Firmware v1.0.0",
-      "file": "firmware/stable/ADSR_V2_old.bin",
-      "repo_branch": "BAKER_EDGE_FX"
-    },
-    {
-      "name": "Retroactive_Bootloader (Dev Use Only)",
+      "name": "Retroactive_Bootloader_6+ (Dev Use Only)",
       "file": "firmware/stable/dsy_bootloader_v6_4-extdfu-2000ms_ripped.bin",
       "repo_branch": "RetroactiveDSP"
     }
