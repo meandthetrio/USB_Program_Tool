@@ -1,9 +1,14 @@
 {
   "product": "Retroactive DSP Synth",
   "releases": [
-    
+
+     {
+      "name": "Firmware Cuz (latest) SD Manage Delete/Rename+Proj Rename+ProjCleanLoad",
+      "file": "firmware/stable/SDmanageRename_ProjLoadingFixes_ProjRenameFixes.bin",
+      "repo_branch": "BAKER_EXPRESS"
+    },
     {
-      "name": "Firmware Cuz (latest) Boot+ExpressLogo",
+      "name": "Firmware Cuz Boot+ExpressLogo",
       "file": "firmware/stable/Cuz_Working_BootandExpressLogo.bin",
       "repo_branch": "BAKER_EXPRESS"
     },
