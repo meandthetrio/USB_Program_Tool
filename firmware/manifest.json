@@ -1,9 +1,13 @@
 {
   "product": "Retroactive DSP Synth",
   "releases": [
-
+ {
+      "name": "Firmware Cuz (latest) SDManageClean+Record+CapsLock",
+      "file": "firmware/stable/SDmanageRecord_CapsLock.bin",
+      "repo_branch": "BAKER_EXPRESS"
+    },
      {
-      "name": "Firmware Cuz (latest) SD Manage Delete/Rename+Proj Rename+ProjCleanLoad",
+      "name": "Firmware Cuz SD Manage Delete/Rename+Proj Rename+ProjCleanLoad",
       "file": "firmware/stable/SDmanageRename_ProjLoadingFixes_ProjRenameFixes.bin",
       "repo_branch": "BAKER_EXPRESS"
     },
