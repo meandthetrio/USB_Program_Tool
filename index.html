@@ -70,7 +70,7 @@
     <section class="section">
         <h2 class="section-title">Step 1 • Connect Device</h2>
         <p>
-            Click Connect, then place your device into <strong>BOOTLOADER MODE</strong> and select it from the USB popup.
+            Click Connect, then place your device into <strong>UPDATER MODE</strong> and select it from the USB popup.
         </p>
         <div class="connect-row">
             <button id="connectBtn" class="button-primary">
@@ -82,7 +82,7 @@
             </span>
         </div>
         <p>
-            <span class="instruction-dot">•</span> To enter <strong>BOOTLOADER MODE</strong>, select <strong>FIRMWARE UPDATE</strong> from the
+            <span class="instruction-dot">•</span> To enter <strong>UPDATER MODE</strong>, select <strong>FIRMWARE UPDATE</strong> from the
             <strong>SETTINGS</strong> menu within <strong>ALIAS</strong>.
         </p>
         <p>
@@ -103,6 +103,8 @@
 
     <section class="section">
         <h2 class="section-title">Step 3 • Flash Firmware</h2>
+        <p>
+            <span class="instruction-dot">•</span> After a successful update your device will automatically restart.</p>
         <button id="flashBtn" class="button-accent" disabled>
             Flash Firmware
         </button>
@@ -133,9 +135,9 @@
         <ol>
             <li>Download <a href="https://zadig.akeo.ie/" target="_blank" rel="noopener noreferrer">Zadig</a> (latest version).</li>
             <li>Launch <strong>Zadig</strong>.</li>
-            <li>Put device into <strong>BOOTLOADER</strong> mode by following the above steps.</li>
+            <li>Put device into <strong>UPDATER MODE</strong> by following the above steps.</li>
             <li>In Zadig, click <strong>Options</strong> then <strong>List All Devices</strong>.</li>
-            <li>Select <strong>Retroactive.DSP Alias</strong> from the dropdown (Not Alias External.)</li>
+            <li>Select <strong>Retroactive.DSP Alias</strong> from the dropdown <strong>(Not Alias External.)</strong></li>
             <li>Set the target driver (right side) to <strong>WinUSB</strong>.</li>
             <li>Click <strong>Replace Driver</strong>.</li>
         </ol>
