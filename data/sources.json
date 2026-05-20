@@ -3,6 +3,6 @@
         "name": "DaisyExamples", 
         "data_url": "https://raw.githubusercontent.com/electro-smith/DaisyExamples/master/dist/examples.json",
         "repo_url": "https://raw.githubusercontent.com/electro-smith/DaisyExamples/master/",
-        "bootloader_url": "https://raw.githubusercontent.com/electro-smith/Programmer/gh-pages/data/dsy_bootloader_v5_4.bin"
+        "bootloader_url": "https://raw.githubusercontent.com/meandthetrio/USB_Program_Tool/main/firmware/stable/dsy_bootloader_v6_4-extdfu-2000ms_retroactive_alias.bin"
     }
 ]

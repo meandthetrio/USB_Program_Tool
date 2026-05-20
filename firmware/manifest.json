@@ -17,8 +17,8 @@
       "repo_branch": "BAKER_EXPRESS"
     },
     {
-      "name": "Retroactive_Bootloader_6+ (Dev Use Only)",
-      "file": "firmware/stable/dsy_bootloader_v6_4-extdfu-2000ms_ripped.bin",
+      "name": "Retroactive_CustomBoot (Dev Use Only)",
+      "file": "firmware/stable/dsy_bootloader_v6_4-extdfu-2000ms_retroactive_alias.bin",
       "repo_branch": "RetroactiveDSP"
     }
   ]
