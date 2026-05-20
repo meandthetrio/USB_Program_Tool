@@ -354,6 +354,26 @@ function configureDfuseStartAddressIfAvailable(dfuDevice, mode = "app") {
   }
 }
 
+function enforceBootloaderFlashTarget(dfuDevice) {
+  if (typeof dfuse === "undefined" || !(dfuDevice instanceof dfuse.Device)) {
+    throw new Error(
+      "Bootloader flash requires a DfuSe memory-map interface. Reconnect in bootloader mode and choose the Internal Flash DFU target."
+    );
+  }
+
+  if (typeof dfuDevice.startAddress !== "number") {
+    throw new Error(
+      "Could not resolve DFU start address for bootloader flash. Reconnect and select Internal Flash."
+    );
+  }
+
+  if (dfuDevice.startAddress !== INTERNAL_FLASH_BASE_ADDRESS) {
+    throw new Error(
+      `Bootloader flash is targeting 0x${dfuDevice.startAddress.toString(16)} instead of 0x${INTERNAL_FLASH_BASE_ADDRESS.toString(16)}. Select Internal Flash DFU target.`
+    );
+  }
+}
+
 async function restartDeviceIfPossible(usbDevice) {
   if (!usbDevice || !usbDevice.opened) {
     return false;
@@ -382,6 +402,9 @@ async function flashBinaryFile(path, mode = "app") {
 
   const dfuDevice = await createDfuDevice(usbDevice, mode);
   configureDfuseStartAddressIfAvailable(dfuDevice, mode);
+  if (mode === "bootloader") {
+    enforceBootloaderFlashTarget(dfuDevice);
+  }
   setProgress(55);
 
   await clearErrorStateIfNeeded(dfuDevice);
