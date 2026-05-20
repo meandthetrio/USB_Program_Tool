@@ -46,6 +46,11 @@ function formatError(err) {
   return String(err || "Unknown error");
 }
 
+function isBootloaderBinaryPath(path) {
+  const normalized = String(path || "").toLowerCase();
+  return normalized.includes("bootloader");
+}
+
 function isRetriableDfuTransferError(err) {
   const msg = formatError(err).toLowerCase();
   return (
@@ -488,7 +493,10 @@ window.addEventListener("DOMContentLoaded", async () => {
         throw new Error("No firmware selected.");
       }
 
-      const restarted = await flashBinaryFile(firmwarePath, "app");
+      const flashMode = isBootloaderBinaryPath(firmwarePath)
+        ? "bootloader"
+        : "app";
+      const restarted = await flashBinaryFile(firmwarePath, flashMode);
       if (restarted) {
         showSuccess("👍 Firmware flashed successfully. Device restarting...");
       } else {
