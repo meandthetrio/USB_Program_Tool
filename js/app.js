@@ -484,7 +484,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     setConnectionStatus("busy", "Waiting for device...");
 
     try {
-      const info = await connectDevice("app");
+      const info = await connectDevice("auto");
 
       if (info) {
         setFlashEnabled(true);

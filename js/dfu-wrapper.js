@@ -34,7 +34,8 @@ export async function connectDevice(mode = "auto") {
     throw new Error("WebUSB is not supported in this browser. Use Chrome or another Chromium-based browser.");
   }
 
-  const normalizedMode = mode === "fs" ? "fs" : "app";
+  const normalizedMode =
+    mode === "fs" ? "fs" : mode === "app" ? "app" : "auto";
   if (selectedDevice) {
     try {
       if (selectedDevice.opened) {
@@ -94,7 +95,12 @@ export async function connectDevice(mode = "auto") {
     );
   }
 
-  if (normalizedMode === "app" && !isStmRomDfu && !looksLikeDaisyBootloader && !hasDfuInterface(device)) {
+  if (
+    normalizedMode === "app" &&
+    !isStmRomDfu &&
+    !looksLikeDaisyBootloader &&
+    !hasDfuInterface(device)
+  ) {
     try {
       await device.close();
     } catch (closeErr) {
