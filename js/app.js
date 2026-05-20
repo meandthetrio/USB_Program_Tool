@@ -12,7 +12,7 @@ import {
 import { connectDevice, getConnectedDevice } from "./dfu-wrapper.js";
 
 const BOOTLOADER_FILE =
-  "firmware/stable/dsy_bootloader_v6_4-extdfu-2000ms_ripped.bin";
+  "firmware/stable/dsy_bootloader_v6_4-extdfu-2000ms_retroactive_alias.bin";
 const DEFAULT_DFU_TRANSFER_SIZE = 1024;
 const DOWNLOAD_PROGRESS_START = 70;
 const DOWNLOAD_PROGRESS_END = 99;
