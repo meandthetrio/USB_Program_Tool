@@ -1,8 +1,13 @@
 {
   "product": "Retroactive DSP Synth",
   "releases": [
+     {
+      "name": "Firmware Cuz (latest) Below+UIBorderFill+Reverse+LedBlink",
+      "file": "firmware/stable/5_21_26.bin",
+      "repo_branch": "BAKER_EXPRESS"
+    },
  {
-      "name": "Firmware Cuz (latest) SDManageClean+Record+CapsLock + Alias External",
+      "name": "Firmware Cuz SDManageClean+Record+CapsLock + Alias External",
       "file": "firmware/stable/SDmanageRecord_CapsLock_AliasExternal.bin",
       "repo_branch": "BAKER_EXPRESS"
     },
@@ -17,7 +22,7 @@
       "repo_branch": "BAKER_EXPRESS"
     },
     {
-      "name": "Retroactive_CustomBoot (Dev Use Only)",
+      "name": "Retroactive_CustomBoot(Dev Use Only)",
       "file": "firmware/stable/dsy_bootloader_v6_4-extdfu-2000ms_retroactive_alias.bin",
       "repo_branch": "RetroactiveDSP"
     }
