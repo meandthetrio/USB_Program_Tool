@@ -2,7 +2,7 @@
   "product": "Retroactive DSP Synth",
   "releases": [
      {
-      "name": "Firmware Cuz (latest) Below+UIBorderFill+Reverse+LedBlink+CentFix",
+      "name": "Firmware Cuz (latest) Below+UIBorderFill+Reverse+LedBlink+CentFix+ProcessFix",
       "file": "firmware/stable/5_21_26.bin",
       "repo_branch": "BAKER_EXPRESS"
     },
