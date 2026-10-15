@@ -2,6 +2,11 @@
   "product": "Retroactive DSP Synth",
   "releases": [
     {
+      "name": "ALIAS 4bef416 (latest): stepped size + offset + post crunch, ENV, cntrl cells, Btn2 = Settings",
+      "file": "firmware/stable/ALIAS_4bef416.bin",
+      "repo_branch": "claude/happy-archimedes-uu8kti"
+    },
+    {
       "name": "ALIAS v2 Env Control (777d95a)",
       "file": "firmware/stable/ALIAS_777d95a_aliasv2_env_cntrl.bin",
       "repo_branch": "aliasv2_env_cntrl"
