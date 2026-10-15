@@ -7,11 +7,6 @@
       "repo_branch": "claude/happy-archimedes-uu8kti"
     },
     {
-      "name": "ALIAS v2 Env Control (777d95a)",
-      "file": "firmware/stable/ALIAS_777d95a_aliasv2_env_cntrl.bin",
-      "repo_branch": "aliasv2_env_cntrl"
-    },
-    {
       "name": "Firmware Cuz (latest) Below+UIBorderFill+Reverse+LedBlink+CentFix+ProcessFix",
       "file": "firmware/stable/5_21_26.bin",
       "repo_branch": "BAKER_EXPRESS"
